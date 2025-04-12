@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB BetWizard - Advanced Baseball Betting Predictor</title>
+    <style>
+        :root {
+            --primary: #0f2e53;
+            --secondary: #d50032;
+            --accent: #1574b6;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .dashboard {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .filters h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(21, 116, 182, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #0e5c98;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .bet-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .content-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .date-nav button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        .current-date {
+            font-weight: 500;
+        }
+        
+        .matchups {
+            margin-bottom: 2rem;
+        }
+        
+        .matchup-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .matchup-header {
+            background-color: var(--light);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .matchup-teams {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .team-logo {
+            width: 30px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .matchup-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .matchup-body {
+            padding: 1rem;
+            display: none;
+        }
+        
+        .matchup-body.active {
+            display: block;
+        }
+        
+        .bet-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+        
+        .bet-tab {
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .bet-tab.active {
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .bet-content-panel {
+            display: none;
+        }
+        
+        .bet-content-panel.active {
+            display: block;
+        }
+        
+        .bet-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .bet-table th, 
+        .bet-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bet-table th {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .bet-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .bet-value-number {
+            font-weight: 700;
+        }
+        
+        .value-indicator {
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        
+        .value-positive {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .value-negative {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        
+        .value-neutral {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .stats-section {
+            margin-top: 2rem;
+        }
+        
+        .stats-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .player-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .prop-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .prop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prop-type {
+            font-weight: 600;
+        }
+        
+        .prop-player {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .prop-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .prop-line {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .prop-recommendation {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .prop-over {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .prop-under {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        
+        .confidence-meter {
+            margin-top: 0.5rem;
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .confidence-value {
+            height: 100%;
+            background-color: var(--accent);
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .model-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(21, 116, 182, 0.05);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .model-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .disclaimer {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .matchup-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .matchup-teams {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚾</span>
+                    <h1>MLB BetWizard</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Game Predictions</a></li>
+                        <li><a href="#">Player Props</a></li>
+                        <li><a href="#">Trends</a></li>
+                        <li><a href="#">Model Info</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard">
+                <aside class="sidebar">
+                    <div class="filters">
+                        <h2>Betting Filters</h2>
+                        <div class="filter-group">
+                            <label for="date-picker">Date</label>
+                            <input type="date" id="date-picker" value="2025-04-12">
+                        </div>
+                        <div class="filter-group">
+                            <label for="bet-type">Bet Type</label>
+                            <select id="bet-type">
+                                <option value="all">All Bet Types</option>
+                                <option value="moneyline">Moneyline</option>
+                                <option value="runline">Run Line</option>
+                                <option value="totals">Totals (Over/Under)</option>
+                                <option value="player-props">Player Props</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="team">Team</label>
+                            <select id="team">
+                                <option value="all">All Teams</option>
+                                <option value="ari">Arizona Diamondbacks</option>
+                                <option value="atl">Atlanta Braves</option>
+                                <option value="bal">Baltimore Orioles</option>
+                                <option value="bos">Boston Red Sox</option>
+                                <option value="chc">Chicago Cubs</option>
+                                <option value="chw">Chicago White Sox</option>
+                                <option value="cin">Cincinnati Reds</option>
+                                <option value="cle">Cleveland Guardians</option>
+                                <option value="col">Colorado Rockies</option>
+                                <option value="det">Detroit Tigers</option>
+                                <option value="hou">Houston Astros</option>
+                                <option value="kc">Kansas City Royals</option>
+                                <option value="laa">Los Angeles Angels</option>
+                                <option value="lad">Los Angeles Dodgers</option>
+                                <option value="mia">Miami Marlins</option>
+                                <option value="mil">Milwaukee Brewers</option>
+                                <option value="min">Minnesota Twins</option>
+                                <option value="nyy">New York Yankees</option>
+                                <option value="nym">New York Mets</option>
+                                <option value="oak">Oakland Athletics</option>
+                                <option value="phi">Philadelphia Phillies</option>
+                                <option value="pit">Pittsburgh Pirates</option>
+                                <option value="sd">San Diego Padres</option>
+                                <option value="sf">San Francisco Giants</option>
+                                <option value="sea">Seattle Mariners</option>
+                                <option value="stl">St. Louis Cardinals</option>
+                                <option value="tb">Tampa Bay Rays</option>
+                                <option value="tex">Texas Rangers</option>
+                                <option value="tor">Toronto Blue Jays</option>
+                                <option value="wsh">Washington Nationals</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="confidence">Minimum Confidence</label>
+                            <select id="confidence">
+                                <option value="all">All Confidence Levels</option>
+                                <option value="high">High (70%+)</option>
+                                <option value="medium">Medium (50-70%)</option>
+                                <option value="low">Low (Below 50%)</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="value">Value Threshold</label>
+                            <select id="value">
+                                <option value="all">All Value Levels</option>
+                                <option value="high">High Value (15%+)</option>
+                                <option value="medium">Medium Value (5-15%)</option>
+                                <option value="low">Low Value (Below 5%)</option>
+                            </select>
+                        </div>
+                        <button id="apply-filters" class="btn btn-block">Apply Filters</button>
+                    </div>
+                </aside>
+                
+                <section class="bet-content">
+                    <div class="content-header">
+                        <h2>Today's MLB Matchups</h2>
+                        <div class="date-nav">
+                            <button id="prev-day">◀</button>
+                            <span class="current-date">April 12, 2025</span>
+                            <button id="next-day">▶</button>
+                        </div>
+                    </div>
+                    
+                    <div class="matchups">
+                        <div class="matchup-card">
+                            <div class="matchup-header">
+                                <div class="matchup-teams">
+                                    <div class="team">
+                                        <div class="team-logo">NYY</div>
+                                        <div class="team-name">Yankees</div>
+                                    </div>
+                                    <span>@</span>
+                                    <div class="team">
+                                        <div class="team-logo">BOS</div>
+                                        <div class="team-name">Red Sox</div>
+                                    </div>
+                                </div>
+                                <div class="matchup-info">
+                                    7:10 PM ET • Fenway Park
+                                </div>
+                            </div>
+                            <div class="matchup-body active">
+                                <div class="bet-tabs">
+                                    <div class="bet-tab active" data-tab="game-odds">Game Odds</div>
+                                    <div class="bet-tab" data-tab="player-props">Player Props</div>
+                                    <div class="bet-tab" data-tab="insights">Insights</div>
+                                </div>
+                                
+                                <div class="bet-content-panel active" id="game-odds">
+                       
