@@ -15,27 +15,27 @@
             --warning: #f59e0b;
             --danger: #ef4444;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #f8f9fa;
             color: var(--dark);
             line-height: 1.6;
         }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
         header {
             background-color: var(--primary);
             color: white;
@@ -45,34 +45,34 @@
             top: 0;
             z-index: 100;
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         .logo h1 {
             font-size: 1.5rem;
             font-weight: 700;
         }
-        
+
         .logo-icon {
             font-size: 1.8rem;
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 1.5rem;
         }
-        
+
         nav ul li a {
             color: white;
             text-decoration: none;
@@ -81,27 +81,27 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
-        
+
         nav ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
-        
+
         .main-content {
             padding: 2rem 0;
         }
-        
+
         .dashboard {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
-        
+
         @media (min-width: 768px) {
             .dashboard {
                 grid-template-columns: 300px 1fr;
             }
         }
-        
+
         .sidebar {
             background-color: white;
             border-radius: 8px;
@@ -109,7 +109,7 @@
             padding: 1.5rem;
             height: fit-content;
         }
-        
+
         .filters h2 {
             font-size: 1.25rem;
             margin-bottom: 1rem;
@@ -117,17 +117,17 @@
             border-bottom: 2px solid var(--light);
             padding-bottom: 0.5rem;
         }
-        
+
         .filter-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .filter-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
-        
+
         .filter-group select,
         .filter-group input {
             width: 100%;
@@ -136,14 +136,14 @@
             border-radius: 4px;
             font-size: 0.9rem;
         }
-        
+
         .filter-group select:focus,
         .filter-group input:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 2px rgba(21, 116, 182, 0.1);
         }
-        
+
         .btn {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -157,41 +157,41 @@
             text-align: center;
             text-decoration: none;
         }
-        
+
         .btn:hover {
             background-color: #0e5c98;
         }
-        
+
         .btn-block {
             display: block;
             width: 100%;
         }
-        
+
         .bet-content {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
         }
-        
+
         .content-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .content-header h2 {
             font-size: 1.5rem;
             color: var(--primary);
         }
-        
+
         .date-nav {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .date-nav button {
             background: none;
             border: none;
@@ -199,22 +199,22 @@
             cursor: pointer;
             color: var(--accent);
         }
-        
+
         .current-date {
             font-weight: 500;
         }
-        
+
         .matchups {
             margin-bottom: 2rem;
         }
-        
+
         .matchup-card {
             border: 1px solid #eee;
             border-radius: 8px;
             margin-bottom: 1rem;
             overflow: hidden;
         }
-        
+
         .matchup-header {
             background-color: var(--light);
             padding: 0.8rem 1rem;
@@ -223,19 +223,19 @@
             align-items: center;
             cursor: pointer;
         }
-        
+
         .matchup-teams {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .team {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .team-logo {
             width: 30px;
             height: 30px;
@@ -247,145 +247,145 @@
             font-weight: bold;
             font-size: 0.8rem;
         }
-        
+
         .matchup-info {
             font-size: 0.9rem;
             color: #666;
         }
-        
+
         .matchup-body {
             padding: 1rem;
             display: none;
         }
-        
+
         .matchup-body.active {
             display: block;
         }
-        
+
         .bet-tabs {
             display: flex;
             border-bottom: 1px solid #eee;
             margin-bottom: 1rem;
         }
-        
+
         .bet-tab {
             padding: 0.6rem 1rem;
             cursor: pointer;
             font-weight: 500;
             border-bottom: 2px solid transparent;
         }
-        
+
         .bet-tab.active {
             border-bottom-color: var(--accent);
             color: var(--accent);
         }
-        
+
         .bet-content-panel {
             display: none;
         }
-        
+
         .bet-content-panel.active {
             display: block;
         }
-        
+
         .bet-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
-        .bet-table th, 
+
+        .bet-table th,
         .bet-table td {
             padding: 0.75rem;
             text-align: left;
             border-bottom: 1px solid #eee;
         }
-        
+
         .bet-table th {
             font-weight: 600;
             color: #666;
         }
-        
+
         .bet-value {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .bet-value-number {
             font-weight: 700;
         }
-        
+
         .value-indicator {
             font-size: 0.8rem;
             font-weight: 500;
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
         }
-        
+
         .value-positive {
             background-color: rgba(16, 185, 129, 0.1);
             color: var(--success);
         }
-        
+
         .value-negative {
             background-color: rgba(239, 68, 68, 0.1);
             color: var(--danger);
         }
-        
+
         .value-neutral {
             background-color: rgba(245, 158, 11, 0.1);
             color: var(--warning);
         }
-        
+
         .stats-section {
             margin-top: 2rem;
         }
-        
+
         .stats-section h3 {
             font-size: 1.1rem;
             margin-bottom: 1rem;
             color: var(--primary);
         }
-        
+
         .player-props {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1rem;
         }
-        
+
         .prop-card {
             border: 1px solid #eee;
             border-radius: 8px;
             padding: 1rem;
         }
-        
+
         .prop-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.5rem;
         }
-        
+
         .prop-type {
             font-weight: 600;
         }
-        
+
         .prop-player {
             font-size: 0.9rem;
             color: #666;
         }
-        
+
         .prop-values {
             display: flex;
             justify-content: space-between;
             margin-top: 0.5rem;
         }
-        
+
         .prop-line {
             font-weight: 700;
             font-size: 1.1rem;
         }
-        
+
         .prop-recommendation {
             display: inline-block;
             padding: 0.2rem 0.5rem;
@@ -393,17 +393,17 @@
             font-weight: 500;
             font-size: 0.9rem;
         }
-        
+
         .prop-over {
             background-color: rgba(16, 185, 129, 0.1);
             color: var(--success);
         }
-        
+
         .prop-under {
             background-color: rgba(239, 68, 68, 0.1);
             color: var(--danger);
         }
-        
+
         .confidence-meter {
             margin-top: 0.5rem;
             height: 6px;
@@ -411,19 +411,19 @@
             border-radius: 3px;
             overflow: hidden;
         }
-        
+
         .confidence-value {
             height: 100%;
             background-color: var(--accent);
         }
-        
+
         .loading {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
         }
-        
+
         .spinner {
             width: 40px;
             height: 40px;
@@ -432,19 +432,19 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-        
+
         .no-data {
             text-align: center;
             padding: 2rem;
             color: #666;
         }
-        
+
         .model-info {
             margin-top: 1rem;
             padding: 1rem;
@@ -452,26 +452,26 @@
             border-radius: 8px;
             font-size: 0.9rem;
         }
-        
+
         .model-info h4 {
             margin-bottom: 0.5rem;
             color: var(--accent);
         }
-        
+
         footer {
             margin-top: 2rem;
             padding: 1.5rem 0;
             background-color: var(--primary);
             color: white;
         }
-        
+
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
-        
+
         .disclaimer {
             font-size: 0.8rem;
             opacity: 0.8;
@@ -479,25 +479,25 @@
             margin: 0 auto;
             margin-top: 1rem;
         }
-        
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-            
+
             nav ul {
                 flex-wrap: wrap;
                 gap: 0.5rem;
             }
-            
+
             .matchup-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
             }
-            
+
             .matchup-teams {
                 flex-direction: column;
                 align-items: flex-start;
@@ -524,7 +524,7 @@
             </div>
         </div>
     </header>
-    
+
     <main class="main-content">
         <div class="container">
             <div class="dashboard">
@@ -533,7 +533,7 @@
                         <h2>Betting Filters</h2>
                         <div class="filter-group">
                             <label for="date-picker">Date</label>
-                            <input type="date" id="date-picker" value="2025-04-12">
+                            <input type="date" id="date-picker" value="2025-04-19">
                         </div>
                         <div class="filter-group">
                             <label for="bet-type">Bet Type</label>
@@ -602,41 +602,177 @@
                         <button id="apply-filters" class="btn btn-block">Apply Filters</button>
                     </div>
                 </aside>
-                
+
                 <section class="bet-content">
                     <div class="content-header">
                         <h2>Today's MLB Matchups</h2>
                         <div class="date-nav">
                             <button id="prev-day">◀</button>
-                            <span class="current-date">April 12, 2025</span>
+                            <span class="current-date">April 19, 2025</span>
                             <button id="next-day">▶</button>
                         </div>
                     </div>
-                    
+
                     <div class="matchups">
-                        <div class="matchup-card">
-                            <div class="matchup-header">
-                                <div class="matchup-teams">
-                                    <div class="team">
-                                        <div class="team-logo">NYY</div>
-                                        <div class="team-name">Yankees</div>
-                                    </div>
-                                    <span>@</span>
-                                    <div class="team">
-                                        <div class="team-logo">BOS</div>
-                                        <div class="team-name">Red Sox</div>
-                                    </div>
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 MLB BetWizard. All rights reserved.</p>
+                <div class="disclaimer">
+                    <p>This website is for informational purposes only. Gamble responsibly.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const datePicker = document.getElementById('date-picker');
+            const prevDayButton = document.getElementById('prev-day');
+            const nextDayButton = document.getElementById('next-day');
+            const currentDateSpan = document.querySelector('.current-date');
+            const matchupsContainer = document.querySelector('.matchups');
+
+            const updateDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                datePicker.value = `${year}-${month}-${day}`;
+                currentDateSpan.textContent = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            };
+
+            const loadMatchups = (date) => {
+                // Simulate loading matchups for the selected date
+                matchupsContainer.innerHTML = `
+                    <div class="matchup-card">
+                        <div class="matchup-header">
+                            <div class="matchup-teams">
+                                <div class="team">
+                                    <div class="team-logo">NYY</div>
+                                    <div class="team-name">Yankees</div>
                                 </div>
-                                <div class="matchup-info">
-                                    7:10 PM ET • Fenway Park
+                                <span>@</span>
+                                <div class="team">
+                                    <div class="team-logo">BOS</div>
+                                    <div class="team-name">Red Sox</div>
                                 </div>
                             </div>
-                            <div class="matchup-body active">
-                                <div class="bet-tabs">
-                                    <div class="bet-tab active" data-tab="game-odds">Game Odds</div>
-                                    <div class="bet-tab" data-tab="player-props">Player Props</div>
-                                    <div class="bet-tab" data-tab="insights">Insights</div>
+                            <div class="matchup-info">
+                                7:10 PM ET • Fenway Park
+                            </div>
+                        </div>
+                        <div class="matchup-body active">
+                            <div class="bet-tabs">
+                                <div class="bet-tab active" data-tab="game-odds">Game Odds</div>
+                                <div class="bet-tab" data-tab="player-props">Player Props</div>
+                                <div class="bet-tab" data-tab="insights">Insights</div>
+                            </div>
+                            <div class="bet-content-panel active" id="game-odds">
+                                <table class="bet-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Bet Type</th>
+                                            <th>Odds</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Moneyline</td>
+                                            <td>-120</td>
+                                            <td>
+                                                <div class="bet-value">
+                                                    <span class="bet-value-number">+10%</span>
+                                                    <span class="value-indicator value-positive">High</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Run Line</td>
+                                            <td>+1.5</td>
+                                            <td>
+                                                <div class="bet-value">
+                                                    <span class="bet-value-number">+5%</span>
+                                                    <span class="value-indicator value-neutral">Medium</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bet-content-panel" id="player-props">
+                                <div class="player-props">
+                                    <div class="prop-card">
+                                        <div class="prop-header">
+                                            <div class="prop-type">Hits</div>
+                                            <div class="prop-player">Aaron Judge</div>
+                                        </div>
+                                        <div class="prop-values">
+                                            <div class="prop-line">Over 1.5</div>
+                                            <div class="prop-recommendation prop-over">Over</div>
+                                        </div>
+                                        <div class="confidence-meter">
+                                            <div class="confidence-value" style="width: 80%;"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="bet-content-panel active" id="game-odds">
-                       
+                            </div>
+                            <div class="bet-content-panel" id="insights">
+                                <p>Insights for the game will be displayed here.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const handleDateChange = () => {
+                const selectedDate = new Date(datePicker.value);
+                updateDate(selectedDate);
+                loadMatchups(selectedDate);
+            };
+
+            datePicker.addEventListener('change', handleDateChange);
+            prevDayButton.addEventListener('click', () => {
+                const currentDate = new Date(datePicker.value);
+                currentDate.setDate(currentDate.getDate() - 1);
+                updateDate(currentDate);
+                loadMatchups(currentDate);
+            });
+            nextDayButton.addEventListener('click', () => {
+                const currentDate = new Date(datePicker.value);
+                currentDate.setDate(currentDate.getDate() + 1);
+                updateDate(currentDate);
+                loadMatchups(currentDate);
+            });
+
+            document.querySelectorAll('.bet-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.bet-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.bet-content-panel').forEach(panel => panel.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('.matchup-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const matchupBody = header.nextElementSibling;
+                    matchupBody.classList.toggle('active');
+                });
+            });
+
+            // Initialize with today's date
+            const today = new Date();
+            updateDate(today);
+            loadMatchups(today);
+        });
+    </script>
+</body>
+</html>
